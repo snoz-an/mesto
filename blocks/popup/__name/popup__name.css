@@ -1,0 +1,8 @@
+.popup__name {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 0 13.3px;
+    margin: 54px 0 29.7px;
+    outline: none;
+}
