@@ -6,9 +6,9 @@
 }
 
 @media screen and (max-width: 850px) {
-    .profile__activity {
-        font-size: 14px;
-        line-height: 17px;
-        text-align: center;
+.profile__activity {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
     }
 }

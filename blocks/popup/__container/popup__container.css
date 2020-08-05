@@ -1,16 +1,16 @@
 .popup__container {
-    width: 28.5%;
+    max-width: 358px;
     background-color: white;
     border-radius: 10px;
     padding: 34px 36px 0;
     height: fit-content;
     align-self: center;
+    position: relative;
 }
 
 @media screen and (max-width: 600px) {
-    .popup__container {
-        width: 89.3%;
-        margin: 0 5%;
+.popup__container {
+    margin: 0 5%;
     }
-    }
+}
     

@@ -1,9 +1,3 @@
 .profile__info-container {
     display: flex;
 }
-
-@media screen and (max-width: 850px) {
-    .profile__info-container {
-        align-self: center;
-    }
-}
