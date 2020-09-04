@@ -27,68 +27,29 @@
             <img src="./images/add__button.svg" alt="добавить" class="profile__add-button-vector">
         </button>
     </section>
-    <section class="elements">
-        <ul class="cards">
-         <li class="card">
-             <img src="./images/card__img-1.jpg" alt="Карачаевск" class="card__img">
-             <div class="card__name-container">
-                 <h3 class="card__name">Карачаевск</h3>
-                <button type="button" class="card__like"> 
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-            </div>
-         </li>
-         <li class="card">
-            <img src="./images/elbrus.jpg" alt="Эльбрус" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name">Гора Эльбрус</h3>
-                <button type="button" class="card__like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-           </div>
-        </li>
-        <li class="card">
-            <img src="./images/dombai.jpg" alt="Домбай" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name">Домбай</h3>
-                <button type="button" class="card__like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-           </div>
-        </li>
-        <li class="card">
-            <img src="./images/place-altai.jpg" alt="Алтай" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name">местечко в Алтае</h3>
-                <button type="button" class="card__like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-           </div>
-        </li>
-        <li class="card">
-            <img src="./images/place-karelia.jpg" alt="Карелия" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name">Карелия</h3>
-                <button type="button" class="card__like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-           </div>
-        </li>
-        <li class="card">
-            <img src="./images/place-kosa.jpg" alt="Коса" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name">Куршская коса</h3>
-                <button type="button" class="card__like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-           </div>
-        </li>
-        </ul>
+    <section class="elements cards">
     </section>
 </main>
+
+<template id="elementsTemplate">
+        <div class="card">
+           <img src = "#" alt="#" class="card__img">
+            <div class="card__name-container">
+                <h3 class="card__name"></h3>
+                <button type="button" class="like">
+                    <img src="./images/like.svg" alt="лайк">
+                </button>
+                <button type="button" class="card__delete">
+                    <img src="./images/card-delete.svg" alt="удалить">
+                </button>
+           </div>
+        </div>
+</template>
+
 <footer class="page__footer">
     <p class="page__footer-author">&copy; 2020 Mesto Russia</p>
 </footer>
+
 <form class="popup" name="form">   
 <div class="popup__container">   
    <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
@@ -98,6 +59,25 @@
    <button type="submit" class="popup__save">Сохранить</button>
 </div>
 </form>
+
+<form class="popup" id="popupAdd" name="form">   
+    <div class="popup__container">   
+       <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
+       <h3 class="popup__header">Новое место</h3>
+       <input type="text" name="input" placeholder="Название" class="popup__input popup__input_card-name">
+       <input type="text" name="input" placeholder="Ссылка на картинку" class="popup__input popup__input_card-link">
+       <button type="submit" class="popup__save popup__save_add">Создать</button>
+    </div>
+    </form>
+
+ <div class="popup popup_img" id="popupImg">
+     <div class="popup__container-img"> 
+     <button type="button" class="popup__close-img" aria-label="Закрыть попап"></button>
+     <img class="popup__img" src="#" alt="#">    
+    <figcaption class="popup__img-caption"></figcaption>
+     </div>
+     </div>   
+
 <script src="scripts/main.js"></script>
 </body>
 </html>

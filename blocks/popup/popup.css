@@ -3,9 +3,17 @@
 @import url("./__header/popup__header.css");
 @import url("./__input/popup__input.css");
 @import url("./__save/popup__save.css");
+@import url("./__img/popup__img.css");
+@import url("./__img-caption/popup__img-caption.css");
+@import url("./__container-img/popup__container-img.css");
+@import url("./__close-img/popup__close-img.css");
 
 .popup {
-    display: none;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0.01;
+    transition: all .5s;
     position: fixed;
     top: 0;
     bottom: 0;
