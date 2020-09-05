@@ -25,79 +25,78 @@ const initialCards = [
   }
 ];
 
-
 const cardsContainer = document.querySelector(".elements");
 
 const addItemToContainer = function(card) {
-
   cardName = card.name;
   cardLink = card.link;
   cardAlt = card.alt;
   const cardElement = document.querySelector("#elementsTemplate").content.cloneNode(true);
+  let cardImg = cardElement.querySelector(".card__img");
   cardElement.querySelector(".card__name").textContent = cardName;
-  cardElement.querySelector(".card__img").src = cardLink;
-  cardElement.querySelector(".card__img").alt = cardAlt;
-  
-  //like
-cardElement.querySelector(".like").addEventListener('click', function (event) {
-  event.target.classList.toggle("like_active"); 
+  cardImg.src = cardLink;
+  cardImg.alt = cardAlt;
+
+// delete Listener
+  cardElement.querySelector(".card__delete").addEventListener('click', handleDeleteCard);
+//
+
+  // like Listener
+  cardElement.querySelector(".like").addEventListener('click', handleLikeIcon);
   //
-});
-  //delete
-  cardElement.querySelector(".card__delete").addEventListener('click', function(event) {
+  // img popup Listener
+  cardImg.addEventListener('click', function() {
+    handlePreviewPicture(event);
+    const cardImgName = imagePopup.querySelector('.popup__img-caption');
+    cardImgName.textContent = card.name;
+  });
+  //
+  cardsContainer.prepend(cardElement);
+};
+
+//like
+const handleLikeIcon = function (event) {
+  event.target.classList.toggle("like_active"); 
+} 
+  //
+
+//delete
+  const handleDeleteCard = function(event) {
     const card =  event.target.closest(".card");
     card.remove();
-  });
+  };
   //
 
   //img popup 
-
-  const imagePopup = document.querySelector('#popupImg');
-  const popupImg = imagePopup.querySelector('.popup__img');
-  const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
-
-  cardElement.querySelector(".card__img").addEventListener('click', function (event) {  
-      imagePopup.classList.toggle('popup_opened');
+  handlePreviewPicture = function(event) {
+    openPopup(imagePopup);
+    const popupImg = imagePopup.querySelector('.popup__img');
       let cardImg = event.target.src;
       popupImg.src = cardImg;
-      let cardImgName = imagePopup.querySelector('.popup__img-caption');
-      cardImgName.textContent = card.name;
-
-      const closeImgPopup = function(event) {
-      if (event.target === event.currentTarget) {
-        imagePopup.classList.remove('popup_opened');
-      }
-    }
-     
-    popupImgCloseButton.addEventListener('click', closeImgPopup);
-  });
+      popupImg.alt = cardImg;
+    };
   //
-  
-  cardsContainer.prepend(cardElement);
-}
-
-initialCards.forEach(addItemToContainer);
 
 //new card
 function addFormSubmitHandler (evt) {
   evt.preventDefault(); 
-const inputCardName = document.querySelector('.popup__input_card-name');
-const inputCardLink = document.querySelector('.popup__input_card-link');
 const addCard = {
 name: inputCardName.value,
 link: inputCardLink.value
-}
+};
 
 addItemToContainer(addCard);
-closeAddPopup();
-}
+closePopup(popupAdd);
+popupAdd.reset();
+};
 
 const popupAdd = document.querySelector('#popupAdd');
 popupAdd.addEventListener('submit', addFormSubmitHandler);
 popupAdd.addEventListener('keydown', function(){});
-
 //
 
+const imagePopup = document.querySelector('#popupImg');
+const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
 const popupContainerImg = document.querySelector('.popup__container-img');
 const popupEdit = document.querySelector('.popup');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
@@ -108,50 +107,60 @@ const name = profile.querySelector('.profile__name');
 const activity = profile.querySelector('.profile__activity');
 const inputActivity = popupEdit.querySelector('.popup__input_activity');
 const inputName = popupEdit.querySelector('.popup__input_name');
+const inputCardName = document.querySelector('.popup__input_card-name');
+const inputCardLink = document.querySelector('.popup__input_card-link');
 const form = document.querySelector('form');
 const popupAddOpenButton = profile.querySelector('.profile__add-button');
 
-let openEditPopup = function() {
-  popupEdit.classList.toggle('popup_opened');
+function toggleModalWindow(modalWindow) {
+  modalWindow.classList.toggle('popup_opened');
+};
+
+const openPopup = function(evt) {
+  toggleModalWindow(evt)
+};
+
+const closePopup = function(evt) {
+  toggleModalWindow(evt);
+};
+
+// слушатели открытия/закрытия
+
+//add
+popupAddOpenButton.addEventListener('click', function() {
+  openPopup(popupAdd);
+});
+
+popupAddCloseButton.addEventListener('click', function() {
+  closePopup(popupAdd);
+});
+//
+
+//edit
+popupEditOpenButton.addEventListener('click', function() {
+  openPopup(popupEdit);
   inputName.value = name.textContent;
   inputActivity.value = activity.textContent;
-}
+});
+popupEditCloseButton.addEventListener('click', function() {
+  closePopup(popupEdit);
+});
+//
 
-let openAddPopup = function() {
-  popupAdd.classList.toggle('popup_opened');
-}
-
-let closeEditPopup = function() {
-  popupEdit.classList.toggle('popup_opened');
-}
-
-let closeAddPopup = function() {
-  popupAdd.classList.toggle('popup_opened');
-}
-
-let closeEditEverywhere = function() {
-  if (event.target !== event.currentTarget) return
-  closeEditPopup();
-}
-
-let closeAddEverywhere = function() {
-  if (event.target !== event.currentTarget) return
-  closeAddPopup();
-}
-
-popupEditOpenButton.addEventListener('click', openEditPopup);
-popupAddOpenButton.addEventListener('click', openAddPopup);
-popupEditCloseButton.addEventListener('click', closeEditPopup);
-popupAddCloseButton.addEventListener('click', closeAddPopup);
-popupEdit.addEventListener('click', closeEditEverywhere);
-popupAdd.addEventListener('click', closeAddEverywhere);
+// img
+popupImgCloseButton.addEventListener('click', function() {
+  closePopup(imagePopup);
+});
+//
+//
 
 function formSubmitHandler (evt) {
    evt.preventDefault(); 
    name.textContent = inputName.value;
    activity.textContent = inputActivity.value;
-   closeEditPopup();
+   closePopup(popupEdit);
 }
 
 form.addEventListener('submit', formSubmitHandler);
 
+initialCards.forEach(addItemToContainer);
