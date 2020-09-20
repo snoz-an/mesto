@@ -50,34 +50,49 @@
     <p class="page__footer-author">&copy; 2020 Mesto Russia</p>
 </footer>
 
-<form class="popup" name="form">   
-<div class="popup__container">   
+
+<section class="popup">   
+<div class="popup__container">
+    <form class="popup__form" name="form" novalidate>    
    <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
    <h3 class="popup__header">Редактировать профиль</h3>
-   <input required type="text" name="input" placeholder="Имя" class="popup__input popup__input_name">
-   <input required type="text" name="input" placeholder="О себе" class="popup__input popup__input_activity">
+   <input required minlength="3" maxlength="40" type="text" name="input" placeholder="Имя" id="input-name" class="popup__input popup__input_name">
+   <span class="popup__error" id="input-name-error"></span>
+   <input required minlength="10" maxlength="200" type="text" name="input" placeholder="О себе" id="input-activity" class="popup__input popup__input_activity">
+   <span class="popup__error" id="input-activity-error"></span>
    <button type="submit" class="popup__save">Сохранить</button>
+   </form>
 </div>
-</form>
+</section>
 
-<form class="popup" id="popupAdd" name="form">   
-    <div class="popup__container">   
+
+<section class="popup" id="popupAdd">   
+    <div class="popup__container"> 
+       <form class="popup__form" name="form" novalidate>  
        <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
        <h3 class="popup__header">Новое место</h3>
-       <input required type="text" name="input" placeholder="Название" class="popup__input popup__input_card-name">
-       <input required type="text" name="input" placeholder="Ссылка на картинку" class="popup__input popup__input_card-link">
+       <input required minlength="1" maxlength="30" type="text" name="input" placeholder="Название" id="input-text" class="popup__input popup__input_card-name">
+       <span class="popup__error" id="input-text-error"></span>
+       <input required name="input" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_card-link" type="url">
+       <span class="popup__error" id="input-url-error"></span>
        <button type="submit" class="popup__save popup__save_add">Создать</button>
+       </form>
     </div>
-    </form>
+</section>
 
  <div class="popup popup_img" id="popupImg">
      <div class="popup__container-img"> 
-     <button type="button" class="popup__close-img" aria-label="Закрыть попап"></button>
-     <img class="popup__img" src="#" alt="#">    
+     <img class="popup__img" src="#" alt="#"> 
     <div class="popup__img-caption"></div>
+    <button type="button" class="popup__close-img" aria-label="Закрыть попап"></button>
      </div>
      </div>   
 
-<script src="scripts/main.js"></script>
+<script src="./vendor/cards.js"></script>
+<script src="./scripts/main.js"></script>
+<script src="./scripts/validate.js"></script>
+
+
+
 </body>
 </html>

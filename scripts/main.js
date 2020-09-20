@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const cardsContainer = document.querySelector(".elements");
 
 const getCardElement = function (card) {
@@ -35,7 +8,7 @@ const getCardElement = function (card) {
   const cardImg = cardElement.querySelector(".card__img");
   cardElement.querySelector(".card__name").textContent = cardName;
   cardImg.src = cardLink;
-  cardImg.alt = cardAlt;
+  cardImg.alt = 'картинка';
 
 // delete Listener
   cardElement.querySelector(".card__delete").addEventListener('click', handleDeleteCard);
@@ -79,7 +52,8 @@ const handleLikeIcon = function (event) {
     const cardImgName = imagePopup.querySelector('.popup__img-caption');
     const cardImg = event.target.src;
     popupImg.src = cardImg;
-    popupImg.alt = cardImg;
+    //popupImg.alt = cardImg;
+    popupImg.alt = 'картинка';
     const cardName = event.target.closest('.card').querySelector(".card__name").textContent;
     cardImgName.textContent = cardName;
     };
@@ -95,14 +69,15 @@ link: inputCardLink.value
 };
 renderCard(addCard);
 closePopup(popupAdd);
-popupAdd.reset();
+inputCardName.value = '';
+inputCardLink.value = '';
 };
 
 const popupAdd = document.querySelector('#popupAdd');
 popupAdd.addEventListener('submit', addFormSubmitHandler);
 popupAdd.addEventListener('keydown', function(){});
-//
 
+const esc = 27;
 const imagePopup = document.querySelector('#popupImg');
 const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
 const popupContainerImg = document.querySelector('.popup__container-img');
@@ -130,22 +105,29 @@ const closePopup = function(evt) {
 
 // слушатели открытия/закрытия
 
-//add
+//open add
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
+  const popupSaveAdd = document.querySelector('.popup__save_add')
+  popupSaveAdd.classList.add(config.inactiveButtonClass)
+  popupSaveAdd.setAttribute("disabled", true)
 });
-
+//close add
 popupAddCloseButton.addEventListener('click', function() {
   closePopup(popupAdd);
 });
 //
 
-//edit
+//open edit
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
   inputName.value = name.textContent;
   inputActivity.value = activity.textContent;
+  const popupSave = document.querySelector('.popup__save')
+  popupSave.classList.remove(config.inactiveButtonClass)
+  popupSave.removeAttribute("disabled", false)
 });
+//close edit
 popupEditCloseButton.addEventListener('click', function() {
   closePopup(popupEdit);
 });
@@ -155,7 +137,34 @@ popupEditCloseButton.addEventListener('click', function() {
 popupImgCloseButton.addEventListener('click', function() {
   closePopup(imagePopup);
 });
+
 //
+//
+
+//сloseEverywhere
+function сloseEverywhere(overlay) {
+  overlay.addEventListener("click", function (evt) {
+    if (evt.target === evt.currentTarget) {
+      closePopup(overlay);
+    }
+  });
+}
+Array.from(document.querySelectorAll(".popup")).forEach((popup) =>
+сloseEverywhere(popup)
+);
+
+//closeEsc
+
+document.addEventListener('keydown', closeEsc);
+
+function closeEsc(evt) {
+  const popupList = document.querySelectorAll('.popup');
+  if (evt.keyCode === esc) {
+    for (var i = 0; i < popupList.length; i++) {
+     popupList[i].classList.remove('popup_opened')
+    }
+  }
+}
 //
 
 function formSubmitHandler (evt) {
@@ -168,3 +177,7 @@ function formSubmitHandler (evt) {
 form.addEventListener('submit', formSubmitHandler);
 
 initialCards.forEach(renderCard);
+
+
+
+

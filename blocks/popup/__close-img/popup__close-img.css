@@ -1,4 +1,5 @@
 .popup__close-img {
+    position: absolute;
     background: none;
     border: none;
     outline: none;
@@ -9,8 +10,8 @@
     width: 56px; 
     height: 56px;
     padding: 0;
-    align-self: flex-end;
-    margin-right: -50px;
+    top: -50px;
+    right: -45px;
 }
 
 .popup__close-img:hover {
@@ -22,7 +23,7 @@
     .popup__close-img {
     width: 30px;
     height: 30px;
-    margin-right: -30px;
-    margin-bottom: 5px;
+    top: -35px;
+    right: -30px;
     }
-}
+};
