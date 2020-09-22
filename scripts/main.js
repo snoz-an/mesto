@@ -94,18 +94,21 @@ const popupSaveAdd = document.querySelector('.popup__save_add');
 const popupSave = document.querySelector('.popup__save');
 
 const openPopup = function(popup) {
-  popup.classList.add('popup_opened', document.addEventListener('keydown', closeEsc));
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeEsc);
+
 };
 
 const closePopup = function(popup) {
-  popup.classList.remove('popup_opened', document.addEventListener('keydown', closeEsc));
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeEsc);
 };
 
 //closeEsc
 function closeEsc(evt) {
   if (evt.keyCode === esc) {
     const openedPopup = document.querySelector('.popup_opened');
-    openedPopup.classList.remove('popup_opened');
+    closePopup(openedPopup);
   }
 }
 //
@@ -131,6 +134,7 @@ popupAddCloseButton.addEventListener('click', function() {
 //open edit
 popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
+  inactiveButton(config);
   inputName.value = name.textContent;
   inputActivity.value = activity.textContent;
 });
@@ -144,7 +148,6 @@ popupEditCloseButton.addEventListener('click', function() {
 popupImgCloseButton.addEventListener('click', function() {
   closePopup(imagePopup);
 });
-
 //
 //
 
@@ -160,14 +163,14 @@ Array.from(document.querySelectorAll(".popup")).forEach((popup) =>
 сloseEverywhere(popup)
 );
 
-function formSubmitHandler (evt) {
+function editFormSubmitHandler (evt) {
    evt.preventDefault(); 
    name.textContent = inputName.value;
    activity.textContent = inputActivity.value;
    closePopup(popupEdit);
 }
 
-form.addEventListener('submit', formSubmitHandler);
+form.addEventListener('submit', editFormSubmitHandler);
 
 initialCards.forEach(renderCard);
 
