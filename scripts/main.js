@@ -1,10 +1,11 @@
 const cardsContainer = document.querySelector(".elements");
+const elementsTemplate = document.querySelector("#elementsTemplate")
 
 const getCardElement = function (card) {
   cardName = card.name;
   cardLink = card.link;
   cardAlt = card.alt;
-  const cardElement = document.querySelector("#elementsTemplate").content.cloneNode(true);
+  const cardElement = elementsTemplate.content.cloneNode(true);
   const cardImg = cardElement.querySelector(".card__img");
   cardElement.querySelector(".card__name").textContent = cardName;
   cardImg.src = cardLink;
@@ -20,7 +21,7 @@ const getCardElement = function (card) {
 
   // img popup Listener
   cardImg.addEventListener('click', function(){
-    handlePreviewPicture(event)
+    handlePreviewPicture(event);
   });
   //
  return (cardElement);
@@ -52,12 +53,10 @@ const handleLikeIcon = function (event) {
     const cardImgName = imagePopup.querySelector('.popup__img-caption');
     const cardImg = event.target.src;
     popupImg.src = cardImg;
-    //popupImg.alt = cardImg;
     popupImg.alt = 'картинка';
     const cardName = event.target.closest('.card').querySelector(".card__name").textContent;
     cardImgName.textContent = cardName;
     };
-
   //
 
 //new card
@@ -69,19 +68,16 @@ link: inputCardLink.value
 };
 renderCard(addCard);
 closePopup(popupAdd);
-inputCardName.value = '';
-inputCardLink.value = '';
 };
 
 const popupAdd = document.querySelector('#popupAdd');
 popupAdd.addEventListener('submit', addFormSubmitHandler);
-popupAdd.addEventListener('keydown', function(){});
 
 const esc = 27;
 const imagePopup = document.querySelector('#popupImg');
 const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
 const popupContainerImg = document.querySelector('.popup__container-img');
-const popupEdit = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditCloseButton = popupEdit.querySelector('.popup__close');
 const popupAddCloseButton = popupAdd.querySelector('.popup__close');
@@ -94,23 +90,37 @@ const inputCardName = document.querySelector('.popup__input_card-name');
 const inputCardLink = document.querySelector('.popup__input_card-link');
 const form = document.querySelector('form');
 const popupAddOpenButton = profile.querySelector('.profile__add-button');
+const popupSaveAdd = document.querySelector('.popup__save_add');
+const popupSave = document.querySelector('.popup__save');
 
-const openPopup = function(evt) {
-  evt.classList.add('popup_opened');
+const openPopup = function(popup) {
+  popup.classList.add('popup_opened', document.addEventListener('keydown', closeEsc));
 };
 
-const closePopup = function(evt) {
-  evt.classList.remove('popup_opened');
+const closePopup = function(popup) {
+  popup.classList.remove('popup_opened', document.addEventListener('keydown', closeEsc));
 };
 
-// слушатели открытия/закрытия
+//closeEsc
+function closeEsc(evt) {
+  if (evt.keyCode === esc) {
+    const openedPopup = document.querySelector('.popup_opened');
+    openedPopup.classList.remove('popup_opened');
+  }
+}
+//
 
+// слушатели открытия/закрытия popup
+const inactiveButton = function(config) {
+  popupSaveAdd.classList.add(config.inactiveButtonClass);
+  popupSaveAdd.setAttribute("disabled", true);
+}
 //open add
 popupAddOpenButton.addEventListener('click', function() {
   openPopup(popupAdd);
-  const popupSaveAdd = document.querySelector('.popup__save_add')
-  popupSaveAdd.classList.add(config.inactiveButtonClass)
-  popupSaveAdd.setAttribute("disabled", true)
+  inactiveButton(config);
+  inputCardName.value = '';
+  inputCardLink.value = '';
 });
 //close add
 popupAddCloseButton.addEventListener('click', function() {
@@ -123,9 +133,6 @@ popupEditOpenButton.addEventListener('click', function() {
   openPopup(popupEdit);
   inputName.value = name.textContent;
   inputActivity.value = activity.textContent;
-  const popupSave = document.querySelector('.popup__save')
-  popupSave.classList.remove(config.inactiveButtonClass)
-  popupSave.removeAttribute("disabled", false)
 });
 //close edit
 popupEditCloseButton.addEventListener('click', function() {
@@ -152,20 +159,6 @@ function сloseEverywhere(overlay) {
 Array.from(document.querySelectorAll(".popup")).forEach((popup) =>
 сloseEverywhere(popup)
 );
-
-//closeEsc
-
-document.addEventListener('keydown', closeEsc);
-
-function closeEsc(evt) {
-  const popupList = document.querySelectorAll('.popup');
-  if (evt.keyCode === esc) {
-    for (var i = 0; i < popupList.length; i++) {
-     popupList[i].classList.remove('popup_opened')
-    }
-  }
-}
-//
 
 function formSubmitHandler (evt) {
    evt.preventDefault(); 

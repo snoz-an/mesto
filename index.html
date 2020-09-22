@@ -31,34 +31,19 @@
     </section>
 </main>
 
-<template id="elementsTemplate">
-        <div class="card">
-           <img src = "#" alt="#" class="card__img">
-            <div class="card__name-container">
-                <h3 class="card__name"></h3>
-                <button type="button" class="like">
-                    <img src="./images/like.svg" alt="лайк">
-                </button>
-                <button type="button" class="card__delete">
-                    <img src="./images/card-delete.svg" alt="удалить">
-                </button>
-           </div>
-        </div>
-</template>
-
 <footer class="page__footer">
     <p class="page__footer-author">&copy; 2020 Mesto Russia</p>
 </footer>
 
 
-<section class="popup">   
+<section class="popup popup_edit">   
 <div class="popup__container">
     <form class="popup__form" name="form" novalidate>    
    <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
    <h3 class="popup__header">Редактировать профиль</h3>
-   <input required minlength="2" maxlength="40" type="text" name="input" placeholder="Имя" id="input-name" class="popup__input popup__input_name">
+   <input required minlength="2" maxlength="40" type="text" name="name" placeholder="Имя" id="input-name" class="popup__input popup__input_name">
    <span class="popup__error" id="input-name-error"></span>
-   <input required minlength="2" maxlength="200" type="text" name="input" placeholder="О себе" id="input-activity" class="popup__input popup__input_activity">
+   <input required minlength="2" maxlength="200" type="text" name="activity" placeholder="О себе" id="input-activity" class="popup__input popup__input_activity">
    <span class="popup__error" id="input-activity-error"></span>
    <button type="submit" class="popup__save">Сохранить</button>
    </form>
@@ -71,9 +56,9 @@
        <form class="popup__form" name="form" novalidate>  
        <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
        <h3 class="popup__header">Новое место</h3>
-       <input required minlength="2" maxlength="30" type="text" name="input" placeholder="Название" id="input-text" class="popup__input popup__input_card-name">
+       <input required minlength="2" maxlength="30" type="text" name="card-name" placeholder="Название" id="input-text" class="popup__input popup__input_card-name">
        <span class="popup__error" id="input-text-error"></span>
-       <input required name="input" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_card-link" type="url">
+       <input required name="card-url" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_card-link" type="url">
        <span class="popup__error" id="input-url-error"></span>
        <button type="submit" class="popup__save popup__save_add">Создать</button>
        </form>
@@ -88,11 +73,24 @@
      </div>
      </div>   
 
+     <template id="elementsTemplate">
+        <div class="card">
+           <img src = "#" alt="#" class="card__img">
+            <div class="card__name-container">
+                <h3 class="card__name"></h3>
+                <button type="button" class="like">
+                    <img src="./images/like.svg" alt="лайк">
+                </button>
+                <button type="button" class="card__delete">
+                    <img src="./images/card-delete.svg" alt="удалить">
+                </button>
+           </div>
+        </div>
+</template>    
+
 <script src="./vendor/cards.js"></script>
 <script src="./scripts/main.js"></script>
 <script src="./scripts/validate.js"></script>
-
-
 
 </body>
 </html>

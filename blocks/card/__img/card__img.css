@@ -1,9 +1,10 @@
 .card__img {
     width: 100%;
     transform: translateY(3px);
-    border-radius: 10px 10px 0 0;
     cursor: pointer;
     height: 282px;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(45deg, #FF00FF, #FFFF00);
 }
 
 @media screen and (max-width: 1280px) {
