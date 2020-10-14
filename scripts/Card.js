@@ -1,3 +1,186 @@
+import {closeEsc} from "./index.js"
+
+const imagePopup = document.querySelector('#popupImg');
+const popupImg = imagePopup.querySelector('.popup__img');
+const cardImgName = imagePopup.querySelector('.popup__img-caption');
+const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
+
+export class Card {
+  constructor(data, cardSelector) {
+    this._cardSelector = cardSelector,
+    this._title = data.name,
+    this._image = data.link
+  }
+
+  _getTemplate() {
+  const cardElement = document.querySelector('#elementsTemplate')
+  .content
+  .querySelector('.card')
+  .cloneNode(true);
+
+  return cardElement;
+  }
+
+  generateCard() {
+    this._element = this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector('.card__img').src = this._image;
+    this._element.querySelector('.card__img').alt = 'изображение'
+    this._element.querySelector('.card__name').textContent = this._title;
+
+    return this._element;
+  }
+
+  _handleOpenPopup() {
+    cardImgName.textContent = this._title;
+    popupImg.src = this._image;
+    imagePopup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeEsc);
+  }
+
+  _handleClosePopup() {
+    popupImg.src = '';
+    imagePopup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeEsc);
+  }
+
+  _handleDeleteCard(evt) {
+    evt.target.closest('.card').remove();
+  }
+  
+  _handleLikeIcon(evt) {
+    evt.target.classList.toggle("like_active"); 
+  }
+
+  _setEventListeners() {
+
+    this._element.querySelector('.card__img').addEventListener('click', () => {
+      this._handleOpenPopup();
+    });
+
+    popupImgCloseButton.addEventListener('click', () => {
+      this._handleClosePopup();
+    });
+
+    this._element.querySelector('.card__delete').addEventListener('click', (evt) => {
+      this._handleDeleteCard(evt);
+    });
+  
+    this._element.querySelector('.like').addEventListener('click', (evt) => {
+      this._handleLikeIcon(evt);
+    });
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*export class Card {
+  constructot(data, cardSelector) {
+    this._cardSelector = cardSelector
+    this._name = data.name;
+    this._link = data.link;
+
+    this._userCard = document.querySelector(this._classSelector);
+    this._clone = this._userCard.content
+      .querySelector(".elements")
+      .cloneNode(true);
+    
+    this._cardElement = this._clone.querySelector('.card')
+    this._cardName = this._clone.querySelector('.card__name');
+    this._cardImg = this._clone.querySelector('.card__img');
+  }
+
+
+
+  _getTemplate() {
+    const cardElement = this._userCard.content
+      .querySelector('.card')
+      .cloneNode(true);
+      const cardName = cardElement.querySelector('.card__name');
+      const cardImg = cardElement.querySelector('.card__img');
+      cardName.textContent = this._name;
+      cardImg.src = this._link;
+      cardImg.alt = 'картинка';
+
+    return cardElement;
+  
+ 
+  }*/
+
+  /*_generateCards() { */
+    /*this._element = this._getTemplate();
+    this._setEventListeners();
+    
+    this._element.querySelector('.card__img').src = this._image;
+    this._element.querySelector('.card__img').alt = this._title;
+    this._element.querySelector('.card__name').textContent = this._title;
+
+    return this._element;*/
+
+    /*this._element = this._getTemplate();
+    this._element.querySelector('.card__name').textContent = this._name;
+    this._element.querySelector('.card__img').src = this._link;
+
+    this._setEventListeners();
+    return this._element;
+  }*/
+  
+
+ /*_handleDeleteCard(evt) {
+  evt.target.closest('.card').remove();
+}
+
+_handleLikeIcon(evt) {
+  evt.target.classList.toggle("like_active"); 
+}
+
+_setEventListeners() {
+
+  document.querySelector('.card__delete').addEventListener('click', () => {
+    this._handleDeleteCard();
+  });
+
+  document.querySelector('.like').addEventListener('click', () => {
+    this._handleLikeIcon();
+  });
+}
+
+cardAdd() {
+  const filalCard = this._setEventListeners(this._getTemplate());
+  return filalCard
+}*/
+
+/*}*/
+
+
+/*
+
 const cardsContainer = document.querySelector(".elements");
 const elementsTemplate = document.querySelector("#elementsTemplate")
 
@@ -96,7 +279,6 @@ const popupSave = document.querySelector('.popup__save');
 const openPopup = function(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeEsc);
-
 };
 
 const closePopup = function(popup) {
@@ -174,6 +356,6 @@ form.addEventListener('submit', editFormSubmitHandler);
 
 initialCards.forEach(renderCard);
 
-
+*/
 
 
