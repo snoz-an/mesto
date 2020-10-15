@@ -1,6 +1,7 @@
-import { Card } from "./Card.js";
+import { Card, imagePopup } from "./Card.js";
 import { initialCards } from "../vendor/cards.js"
 import { FormValidator } from "./FormValidator.js"
+
 const esc = 27;
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
@@ -17,15 +18,16 @@ const inputCardLink = document.querySelector('.popup__input_card-link');
 const popupAddOpenButton = profile.querySelector('.profile__add-button');
 const popupSaveAdd = document.querySelector('.popup__save_add');
 const cardsContainer = document.querySelector(".elements");
+const popupImgCloseButton = imagePopup.querySelector('.popup__close-img');
 
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closeEsc);
+    document.addEventListener('keyup', closeEsc);
   };
   
  function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closeEsc);
+    document.removeEventListener('keyup', closeEsc);
   };
 
 //open add
@@ -90,8 +92,14 @@ popupEditOpenButton.addEventListener('click', function() {
   });
   //
 
+  //close ImgPopup
+  popupImgCloseButton.addEventListener('click', () => {
+    closePopup(imagePopup);
+    });
+  //
+
 //closeEsc
-export function closeEsc(evt) {
+ function closeEsc(evt) {
     if (evt.keyCode === esc) {
       const openedPopup = document.querySelector('.popup_opened');
       closePopup(openedPopup);
@@ -113,16 +121,6 @@ function сloseEverywhere(overlay) {
   );
   //
 
-  function renderCard() {
-    initialCards.forEach((item) => {
-      const card = new Card(item, '#elementsTemplate');
-      const cardElement = card.generateCard();
-      cardsContainer.prepend(cardElement);
-    });
-  };
-
-  renderCard();
-
 //Validation
   const config = {
     formSelector: ".popup__form",
@@ -142,3 +140,13 @@ function сloseEverywhere(overlay) {
   
   formValidation(config, formList);
   //
+
+  function renderCard() {
+    initialCards.forEach((item) => {
+      const card = new Card(item, '#elementsTemplate');
+      const cardElement = card.generateCard();
+      cardsContainer.prepend(cardElement);
+    });
+  };
+
+  renderCard();
