@@ -8,7 +8,7 @@ export class Card {
   }
 
   _getTemplate() {
-  const cardElement = document.querySelector('#elementsTemplate')
+  const cardElement = document.querySelector(this._cardSelector)
   .content
   .querySelector('.card')
   .cloneNode(true);
@@ -28,8 +28,8 @@ export class Card {
     return this._element;
   }
 
-  _handleDeleteCard(evt) {
-    evt.target.closest('.card').remove();
+  _handleDeleteCard() {
+    this._element.remove();
   }
   
   _handleLikeIcon(evt) {
@@ -39,8 +39,8 @@ export class Card {
   _setEventListeners() {
 
    
-   this._element.querySelector('.card__delete').addEventListener('click', (evt) => {
-      this._handleDeleteCard(evt);
+   this._element.querySelector('.card__delete').addEventListener('click', () => {
+      this._handleDeleteCard();
     });
   
    this._element.querySelector('.like').addEventListener('click', (evt) => {

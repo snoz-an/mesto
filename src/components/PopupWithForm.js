@@ -21,13 +21,10 @@ export class PopupWithForm extends Popup {
     }
 
     setEventListeners() {
-         
         super.setEventListeners();
-        this._selector.querySelector('.popup__close').addEventListener('click', this.close.bind(this));
         this._form.addEventListener("submit", (evt) => {
               evt.preventDefault();
               this._handleFormSubmit(this._getInputValues());
-              this.close();
         })
 }
 }

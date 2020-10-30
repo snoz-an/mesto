@@ -1,6 +1,6 @@
 import './index.css';
 import { Card } from "../components/Card.js";
-import { initialCards } from "../vendor/cards.js"
+import { initialCards } from "../utils/cards.js"
 import { FormValidator } from "../components/FormValidator.js"
 import { Section } from "../components/Section.js"
 import { PopupWithImage } from "../components/PopupWithImage.js"
@@ -46,7 +46,8 @@ const popupImage = new PopupWithImage('#popupImg');
      }
 
     const card = createCard(item);
-    cardList.addItem(card)}
+    cardList.addItem(card);
+  }
 }, '.elements');
 
 cardList.renderItems();
@@ -79,6 +80,7 @@ handleFormSubmit: () => {
     link: inputCardLink.value
   }
   cardList.renderCard(item);
+  popupAdd.close();
 }}
 );
 
