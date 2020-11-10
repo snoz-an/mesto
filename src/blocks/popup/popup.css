@@ -8,6 +8,7 @@
 @import url("./__container-img/popup__container-img.css");
 @import url("./__close-img/popup__close-img.css");
 @import url("./__error/popup__error.css");
+/*@import url("./__delete/popup__delete.css");*/
 
 .popup {
     display: flex;

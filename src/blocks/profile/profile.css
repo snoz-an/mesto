@@ -8,6 +8,7 @@
 @import url("./__edit-button-vector/profile__edit-button-vector.css");
 @import url("./__info-container/profile__info-container.css");
 @import url("./__info/profile__info.css");
+@import url("./__avatar-button/profile__avatar-button.css");
 
 .profile {
     margin: auto;

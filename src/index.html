@@ -11,8 +11,9 @@
 </header>
 <main>
     <section class="profile">   
-    <div class="profile__container"> 
-            <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
+    <div class="profile__container">     
+        <img src="./images/avatar.jpg" alt="аватар" class="profile__avatar">
+        <button type="button" class="profile__avatar-button"></button>
         <div class="profile__info">
             <div class="profile__info-container"><h1 class="profile__name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit-button">
@@ -62,6 +63,29 @@
     </div>
 </section>
 
+
+<section class="popup" id="popupAvatar">   
+    <div class="popup__container"> 
+       <form class="popup__form" name="form" novalidate>  
+       <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
+       <h3 class="popup__header">Обновить аватар</h3>
+       <input required name="card-url" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_avatar-link" type="url">
+       <span class="popup__error" id="input-url-error"></span>
+       <button type="submit" class="popup__save popup__save_avatar">Сохранить</button>
+       </form>
+    </div>
+</section>
+
+<section class="popup" id="popupWarning">   
+    <div class="popup__container"> 
+       <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
+       <h3 class="popup__header">Вы уверены?</h3>
+       <button type="button" class="popup__save popup__save_delete">Да</button>
+    </div>
+</section>
+
+
+
  <div class="popup popup_img" id="popupImg">
      <div class="popup__container-img"> 
      <img class="popup__img" src="#" alt="#"> 
@@ -75,9 +99,12 @@
            <img src = "#" alt="#" class="card__img">
             <div class="card__name-container">
                 <h3 class="card__name"></h3>
-                <button type="button" class="like">
+                <div class="like__container">
+                    <button type="button" class="like">
                     <img src="./images/like.svg" alt="лайк">
                 </button>
+                <span class = "like__counter">0</span>
+                </div>
                 <button type="button" class="card__delete">
                     <img src="./images/card-delete.svg" alt="удалить">
                 </button>
