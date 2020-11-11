@@ -44,7 +44,7 @@
    <span class="popup__error" id="input-name-error"></span>
    <input required minlength="2" maxlength="200" type="text" name="activity" placeholder="О себе" id="input-activity" class="popup__input popup__input_activity">
    <span class="popup__error" id="input-activity-error"></span>
-   <button type="submit" class="popup__save">Сохранить</button>
+   <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
    </form>
 </div>
 </section>
@@ -69,7 +69,7 @@
        <form class="popup__form" name="form" novalidate>  
        <button type="button" class="popup__close" aria-label="Закрыть попап"></button> 
        <h3 class="popup__header">Обновить аватар</h3>
-       <input required name="card-url" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_avatar-link" type="url">
+       <input required name="avatar-url" placeholder="Ссылка на картинку" id="input-url" class="popup__input popup__input_avatar-link" type="url">
        <span class="popup__error" id="input-url-error"></span>
        <button type="submit" class="popup__save popup__save_avatar">Сохранить</button>
        </form>
@@ -92,7 +92,7 @@
     <div class="popup__img-caption"></div>
     <button type="button" class="popup__close-img" aria-label="Закрыть попап"></button>
      </div>
-     </div>   
+     </div>  
 
      <template id="elementsTemplate">
         <div class="card">

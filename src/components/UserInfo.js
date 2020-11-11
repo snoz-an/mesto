@@ -10,6 +10,7 @@ export class UserInfo {
         const data = {
               name: this._name.textContent,
               about: this._about.textContent,
+              avatar: this._avatar.src
         }
         return data
     }
@@ -17,9 +18,10 @@ export class UserInfo {
     setUserInfo(data) {
               this._name.textContent  = data.name;
               this._about.textContent = data.about;
+              this._avatar.src = data.avatar;
         }
 
-        avatarUserInfo(link) {
-            this._avatar.src = link;
+        avatarUserInfo(data) {
+            this._avatar.src = data.avatar;
         }
 }
