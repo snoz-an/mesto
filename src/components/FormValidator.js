@@ -1,15 +1,15 @@
 export class FormValidator {
-constructor(config, formElement)  {
-  this._formSelector = config.formSelector;
-  this._formElement = formElement;
-  this._inputSelector = config.inputSelector;
-  this._submitButtonSelector = config.submitButtonSelector;
-  this._inactiveButtonClass = config.inactiveButtonClass;
-  this._inputErrorClass = config.nputErrorClass;
-  this._errorClass = config.errorClass;
-};
+  constructor(config, formElement)  {
+    this._formSelector = config.formSelector;
+    this._formElement = formElement;
+    this._inputSelector = config.inputSelector;
+    this._submitButtonSelector = config.submitButtonSelector;
+    this._inactiveButtonClass = config.inactiveButtonClass;
+    this._inputErrorClass = config.nputErrorClass;
+    this._errorClass = config.errorClass;
+  };
  
- _showInputError(formElement, inputElement, errorMessage) {
+_showInputError(formElement, inputElement, errorMessage) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   errorElement.classList.add(this._errorClass);
   inputElement.classList.add(this._inputErrorClass);
@@ -39,8 +39,8 @@ _hasInvalidInput(inputList) {
  
 _toggleButtonState(inputList, buttonElement) {
   if (this._hasInvalidInput(inputList)) {
-  buttonElement.setAttribute("disabled", true);
-  buttonElement.classList.add(this._inactiveButtonClass);
+  
+  this.buttonDisabled(buttonElement)
 
 } else {
   buttonElement.removeAttribute("disabled", false)
@@ -69,7 +69,13 @@ enableValidation(config) {
     this._setEventListeners(formElement);
   });
 };
-};
+
+buttonDisabled(button) {
+  button.classList.add(this._inactiveButtonClass);
+  button.setAttribute("disabled", true);
+}
+
+}
 
 
 
